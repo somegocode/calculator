@@ -6,7 +6,21 @@ import (
 )
 
 
+func count_rome_symbols(num string) {
+    count := map[string]int{"I": 0, "V": 2, "X": 0}
+    for i := range num {
+        n := string(num[i])
+        if count[n] == 3  {
+            panic("Malformed numeral: " + num)
+        } else {
+            count[n] += 1
+        }
+    }
+}
+
+
 func rome_to_arab(num string) int {
+    count_rome_symbols(num)
     arab := 0
     symbols := map[string]int{"I": 1, "V": 5, "X": 10, "L": 50, "C": 100}
     for i := range num {
@@ -52,7 +66,7 @@ func arab_to_rome(num string) string {
 func calculate(x int, y int, arif string) string {
     var calc int
     if x < 1 || x > 10 || y < 1 || y > 10 {
-        panic("Value error.")
+        panic("Numeral out of range.")
     }
     if arif == "+" {
         calc = x + y
